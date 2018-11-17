@@ -1,0 +1,21 @@
+{
+  "name": "omabot-service",
+  "version": "1.0.0",
+  "description": "Backend for chatbot",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/festplatte/omabot-service.git"
+  },
+  "bugs": {
+    "url": "https://github.com/festplatte/omabot-service/issues"
+  },
+  "homepage": "https://github.com/festplatte/omabot-service#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
