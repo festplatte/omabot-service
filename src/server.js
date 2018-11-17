@@ -1,12 +1,18 @@
 const express = require("express");
 const https = require("https");
+const bodyParser = require("body-parser");
 const fs = require("fs");
-const port = 3000;
+const config = require("./config");
 
-var options = {
-  key: fs.readFileSync("/etc/letsencrypt/live/www.realisable.de/privkey.pem"),
-  cert: fs.readFileSync("/etc/letsencrypt/live/www.realisable.de/cert.pem")
-};
+var options = config.isProd
+  ? {
+      key: fs.readFileSync(
+        "/etc/letsencrypt/live/www.realisable.de/privkey.pem"
+      ),
+      cert: fs.readFileSync("/etc/letsencrypt/live/www.realisable.de/cert.pem"),
+      ca: fs.readFileSync("/etc/letsencrypt/live/www.realisable.de/chain.pem")
+    }
+  : null;
 
 const lotharPhrases = [
   "Wäre, wäre, Fahrradkette",
@@ -19,13 +25,17 @@ const lotharPhrases = [
 ];
 
 const app = express();
+app.use(bodyParser.json());
 
 const server = https
   .createServer(options, app)
-  .listen(port, () => console.log(`Listening on port ${port}!`));
+  .listen(config.port, () => console.log(`Listening on port ${config.port}!`));
 
-app.get("/lothar", (req, res) => {
+function getLotharPhrase(req, res) {
   console.log("Called /lothar");
+  console.log(req);
+  console.log(req.method);
+  console.log(req.body);
   let phrase =
     lotharPhrases[Math.floor(Math.random() * lotharPhrases.length - 1)];
   res.json({
@@ -36,4 +46,7 @@ app.get("/lothar", (req, res) => {
       }
     ]
   });
-});
+}
+
+app.get("/lothar", getLotharPhrase);
+app.post("/lothar", getLotharPhrase);
