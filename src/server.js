@@ -24,7 +24,16 @@ const server = https
   .createServer(options, app)
   .listen(port, () => console.log(`Listening on port ${port}!`));
 
-app.get("/", (req, res) => res.send("Hello World!"));
 app.get("/lothar", (req, res) => {
-  res.send(lotharPhrases[Math.floor(Math.random() * lotharPhrases.length - 1)]);
+  console.log("Called /lothar");
+  let phrase =
+    lotharPhrases[Math.floor(Math.random() * lotharPhrases.length - 1)];
+  res.json({
+    replies: [
+      {
+        type: "text",
+        content: phrase
+      }
+    ]
+  });
 });

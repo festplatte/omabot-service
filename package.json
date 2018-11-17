@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "deploy": "scp src/* ubuntu@52.90.103.172:/home/ubuntu/omabot/src"
   },
   "repository": {
     "type": "git",
