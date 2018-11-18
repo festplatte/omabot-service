@@ -3,6 +3,7 @@ require('dotenv').config();
 var fs = require('fs');
 var csv = require("fast-csv");
 const fetch = require("node-fetch");
+const connection = require("./dbconnection");
 
 csv
     .fromPath("data/matthaeus_zeit_2018.csv", {delimiter: ";"})
@@ -33,6 +34,15 @@ function nlp(statement) {
     })
     .then(res => res.json())
     .then(res => {
-        console.log(res)
-    });
+        // Store statement
+        connection.query("INSERT INTO statements (speech, sentiment_score, sentiment_label) VALUES (?, ?, ?);", [statement, res.sentiment.document.score, res.sentiment.document.label]);
+
+        res.entities.forEach(x => {
+            // Store entity
+            connection.query("BEGIN IF NOT EXISTS (SELECT * FROM entities WHERE name = ?) BEGIN INSERT INTO entities (name) VALUES (?); END END", [x.text, x.text]);
+
+            // Store relation
+            connection.query("INSERT INTO statement_entities VALUES (?, ?, ?, ?);", [statementId, x.text, x.relevance, x.score]);
+        });
+    });        
 }
