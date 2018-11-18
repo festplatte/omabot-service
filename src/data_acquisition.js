@@ -1,10 +1,8 @@
 require('dotenv').config();
+
 var fs = require('fs');
 var csv = require("fast-csv");
 const fetch = require("node-fetch");
-var NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
-
-require('dotenv').config();
 
 csv
     .fromPath("data/matthaeus_zeit_2018.csv", {delimiter: ";"})
