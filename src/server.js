@@ -53,7 +53,9 @@ function logRequest(req, res) {
   console.log(req);
 }
 
+const lotharbot = require("./lotharbot");
 app.get("/lothar", getLotharPhrase);
 app.post("/lothar", getLotharPhrase);
 app.get("/log", logRequest);
 app.post("/log", logRequest);
+app.post("/story", lotharbot);

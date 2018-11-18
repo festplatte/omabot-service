@@ -4,14 +4,12 @@ CREATE TABLE statements (
     sentiment_score FLOAT(4,4),
     sentiment_label VARCHAR(10),
     PRIMARY KEY (id)
-) CHARACTER SET 'utf8' 
-COLLATE 'utf8_general_ci';
+);
 
 CREATE TABLE entities (
     name VARCHAR(100) NOT NULL,
     PRIMARY KEY (name)
-) CHARACTER SET 'utf8' 
-COLLATE 'utf8_general_ci';
+);
 
 CREATE TABLE statements_entities(
     statement_id INT(10),
@@ -21,5 +19,8 @@ CREATE TABLE statements_entities(
     PRIMARY KEY (statement_id, entity),
     FOREIGN KEY (statement_id) REFERENCES statements(id),
     FOREIGN KEY (entity) REFERENCES entities(name)
-) CHARACTER SET 'utf8' 
-COLLATE 'utf8_general_ci';
+);
+
+
+-- CHARACTER SET 'utf8mb4' 
+-- COLLATE 'utf8mb4_general_ci';
