@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/server.js",
-    "deploy": "scp src/* ubuntu@52.90.103.172:/home/ubuntu/omabot/src"
+    "deploy": "scp src/* ubuntu@52.90.103.172:/home/ubuntu/omabot/src/",
+    "deploy-db": "scp db/* ubuntu@52.90.103.172:/home/ubuntu/omabot/db/"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/festplatte/omabot-service#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "mariadb": "^2.0.1-beta"
   }
 }

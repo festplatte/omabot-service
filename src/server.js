@@ -29,13 +29,14 @@ app.use(bodyParser.json());
 
 const server = https
   .createServer(options, app)
-  .listen(config.port, () => console.log(`Listening on port ${config.port}!`));
+  .listen(config.port, () =>
+    console.log(
+      `Listening on port ${config.port}! Production mode: ${config.isProd}`
+    )
+  );
 
 function getLotharPhrase(req, res) {
   console.log("Called /lothar");
-  console.log(req);
-  console.log(req.method);
-  console.log(req.body);
   let phrase =
     lotharPhrases[Math.floor(Math.random() * lotharPhrases.length - 1)];
   res.json({
@@ -48,5 +49,11 @@ function getLotharPhrase(req, res) {
   });
 }
 
+function logRequest(req, res) {
+  console.log(req);
+}
+
 app.get("/lothar", getLotharPhrase);
 app.post("/lothar", getLotharPhrase);
+app.get("/log", logRequest);
+app.post("/log", logRequest);
