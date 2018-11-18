@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/festplatte/omabot-service#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "csv": "^4.0.0",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "fast-csv": "^2.4.1",
+    "node-fetch": "^2.3.0"
   }
 }
