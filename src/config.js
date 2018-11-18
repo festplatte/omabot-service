@@ -5,7 +5,8 @@ const devConfig = {
     host: "localhost",
     database: "omabot",
     user: "root",
-    password: ""
+    password: "",
+    connectionLimit: 1
   }
 };
 const prodConfig = {
@@ -15,7 +16,8 @@ const prodConfig = {
     host: "localhost",
     user: "root",
     database: "omabot",
-    password: "Test123."
+    password: "Test123.",
+    connectionLimit: 1
   }
 };
 

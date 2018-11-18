@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/server.js",
     "deploy": "scp src/* ubuntu@52.90.103.172:/home/ubuntu/omabot/src/",
-    "deploy-db": "scp db/* ubuntu@52.90.103.172:/home/ubuntu/omabot/db/"
+    "deploy-db": "scp db/* ubuntu@52.90.103.172:/home/ubuntu/omabot/db/",
+    "setup-db": "npm run deploy-db && ssh ubuntu@52.90.103.172 'mysql --user=root --password=Test123. omabot < /home/ubuntu/omabot/db/setup_scheme.sql'",
+    "drop-db": "npm run deploy-db && ssh ubuntu@52.90.103.172 'mysql --user=root --password=Test123. omabot < /home/ubuntu/omabot/db/drop_tables.sql'"
   },
   "repository": {
     "type": "git",
